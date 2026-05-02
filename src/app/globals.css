@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :root {
+    --color-primary: 22, 29, 70;      /* #161D46 */
+    --color-primary-light: 30, 42, 94;
+    --color-accent: 247, 191, 62;     /* #F7BF3E */
+    --color-accent-dark: 212, 164, 62;
+    --color-body: 62, 67, 84;         /* #3E4354 */
+    --color-body-light: 100, 116, 139;
+    --color-body-lighter: 148, 163, 184;
+    --color-surface: 255, 255, 255;   /* #FFFFFF */
+    --color-surface-secondary: 248, 250, 252;
+    --color-surface-tertiary: 241, 245, 249;
+    --color-surface-border: 226, 232, 240;
+  }
+
+  .dark {
+    --color-primary: 248, 250, 252;     /* Light text on dark bg */
+    --color-primary-light: 226, 232, 240;
+    --color-accent: 247, 191, 62;       /* Keep accent */
+    --color-accent-dark: 212, 164, 62;
+    --color-body: 203, 213, 225;        /* Lighter text */
+    --color-body-light: 148, 163, 184;
+    --color-body-lighter: 100, 116, 139;
+    --color-surface: 15, 23, 42;        /* Dark slate background */
+    --color-surface-secondary: 30, 41, 59;
+    --color-surface-tertiary: 51, 65, 85;
+    --color-surface-border: 51, 65, 85;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: rgb(var(--color-body));
+    background-color: rgb(var(--color-surface));
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: rgba(247, 191, 62, 0.3);
+    color: #161D46;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #F1F5F9;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+  }
+}
+
+@layer components {
+  /* Glassmorphism */
+  .glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .glass-dark {
+    background: rgba(var(--color-surface-secondary), 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(var(--color-surface-border), 0.5);
+  }
+
+  .glass-card {
+    background: rgba(var(--color-surface), 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(var(--color-surface-border), 0.8);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Gradient backgrounds */
+  .gradient-primary {
+    background: linear-gradient(135deg, #161D46 0%, #1E2A5E 50%, #2A3A7C 100%);
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, #F7BF3E 0%, #F9D06A 100%);
+  }
+
+  .gradient-hero {
+    background: linear-gradient(160deg, #0E1330 0%, #161D46 40%, #1E2A5E 70%, #2A3A7C 100%);
+  }
+
+  .gradient-radial {
+    background: radial-gradient(circle at 30% 50%, rgba(247, 191, 62, 0.08) 0%, transparent 60%);
+  }
+
+  .gradient-mesh {
+    background:
+      radial-gradient(at 20% 20%, rgba(247, 191, 62, 0.1) 0%, transparent 50%),
+      radial-gradient(at 80% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(22, 29, 70, 0.02) 0%, transparent 50%);
+  }
+
+  /* Button variants */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-accent text-primary font-semibold rounded-lg
+           hover:bg-accent-hover transition-all duration-300 shadow-soft hover:shadow-glow
+           active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-lg
+           hover:bg-primary-light transition-all duration-300 shadow-soft
+           active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-white/30 text-white font-semibold rounded-lg
+           hover:bg-white/10 transition-all duration-300
+           active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-4 py-2 text-body font-medium rounded-lg
+           hover:bg-surface-tertiary transition-all duration-200;
+  }
+
+  /* Section styles */
+  .section-padding {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Card styles */
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-medium;
+  }
+
+  .card-premium {
+    @apply bg-white rounded-2xl p-6 md:p-8 border border-surface-border shadow-soft card-hover;
+  }
+
+  /* Text gradient */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent to-accent-light;
+  }
+
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-light;
+  }
+
+  /* Decorative elements */
+  .blob {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+
+  .section-badge {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-body-sm font-semibold
+           bg-accent/10 text-accent-dark border border-accent/20;
+  }
+
+  /* Form styles */
+  .input-field {
+    @apply w-full px-4 py-3 bg-surface-secondary border border-surface-border rounded-xl
+           text-primary placeholder:text-body-lighter
+           focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent
+           transition-all duration-200;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-in {
+    animation: slide-up 0.5s ease-out forwards;
+  }
+}
