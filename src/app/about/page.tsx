@@ -1,9 +1,11 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Target, Users, Award, Heart, GraduationCap, TrendingUp } from "lucide-react";
 import { TEAM_MEMBERS, HERO_STATS } from "@/lib/constants";
-import ConsultationCTA from "@/components/landing/ConsultationCTA";
+
+const ConsultationCTA = dynamic(() => import("@/components/landing/ConsultationCTA"), { ssr: false });
 
 const TIMELINE = [
   { year: "2022", title: "Founded", desc: "Started as a small tutoring service for IMGs preparing for USMLE Step 1." },
