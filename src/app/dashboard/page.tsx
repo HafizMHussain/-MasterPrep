@@ -20,7 +20,7 @@ const WEEKLY_PERFORMANCE = [
 ];
 
 export default function DashboardPage() {
-  const { user, profile, loading: authLoading } = useAuthStore();
+  const { user, profile, isLoading: authLoading } = useAuthStore();
   const [stats, setStats] = useState<any>(null);
   const [attempts, setAttempts] = useState<any[]>([]);
   const [dataLoading, setDataLoading] = useState(true);

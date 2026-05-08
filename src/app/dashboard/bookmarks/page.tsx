@@ -8,7 +8,7 @@ import { useAuthStore } from "@/stores/auth-store";
 import { cn } from "@/lib/utils";
 
 export default function BookmarksPage() {
-  const { user, loading: authLoading } = useAuthStore();
+  const { user, isLoading: authLoading } = useAuthStore();
   const [bookmarks, setBookmarks] = useState<any[]>([]);
   const [dataLoading, setDataLoading] = useState(true);
   const [search, setSearch] = useState("");

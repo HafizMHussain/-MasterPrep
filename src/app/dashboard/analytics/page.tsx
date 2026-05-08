@@ -18,7 +18,7 @@ const SUBJECT_COLORS: Record<string, string> = {
 };
 
 export default function AnalyticsPage() {
-  const { user, loading: authLoading } = useAuthStore();
+  const { user, isLoading: authLoading } = useAuthStore();
   const [stats, setStats] = useState<any>(null);
   const [dataLoading, setDataLoading] = useState(true);
 

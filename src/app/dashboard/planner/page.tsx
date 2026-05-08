@@ -16,7 +16,7 @@ const TYPE_CONFIG: Record<string, any> = {
 };
 
 export default function PlannerPage() {
-  const { user, profile, loading: authLoading } = useAuthStore();
+  const { user, profile, isLoading: authLoading } = useAuthStore();
   const [dailyGoal, setDailyGoal] = useState(profile?.daily_goal || 80);
   const [dataLoading, setDataLoading] = useState(true);
   const [plan, setPlan] = useState<any>(null);

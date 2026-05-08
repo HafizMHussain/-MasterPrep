@@ -2,9 +2,16 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-  apiVersion: "2024-12-18.acacia",
-});
+let stripe: Stripe | null = null;
+
+function getStripe(): Stripe {
+  if (!stripe) {
+    stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
+      apiVersion: "2026-04-22.dahlia",
+    });
+  }
+  return stripe;
+}
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
 
@@ -23,7 +30,7 @@ export async function POST(req: Request) {
 
     if (process.env.STRIPE_SECRET_KEY && webhookSecret && signature) {
       try {
-        event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
+        event = getStripe().webhooks.constructEvent(body, signature, webhookSecret);
       } catch (err: any) {
         console.error(`Webhook signature verification failed.`, err.message);
         return new NextResponse(`Webhook Error: ${err.message}`, { status: 400 });
@@ -49,7 +56,7 @@ export async function POST(req: Request) {
           let plan = "pro";
           
           if (process.env.STRIPE_SECRET_KEY) {
-             const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+             const subscription = await getStripe().subscriptions.retrieve(subscriptionId);
              // Logic to determine plan based on price ID
              // If price == Premium Price ID -> 'premium'
              // Else -> 'pro'

@@ -8,7 +8,7 @@ import { updateProfile, uploadAvatar } from "@/services/auth";
 import { supabase } from "@/lib/supabase";
 
 export default function ProfilePage() {
-  const { profile, user, setProfile, loading: authLoading } = useAuthStore();
+  const { profile, user, setProfile, isLoading: authLoading } = useAuthStore();
   const [mounted, setMounted] = useState(false);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);

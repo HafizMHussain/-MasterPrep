@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Clock, Calendar, User, Share2 } from "lucide-react";
 import { BLOG_POSTS } from "@/lib/constants";
 
+export const dynamic = "force-dynamic";
+
 export default function BlogPostPage() {
   const params = useParams();
   const post = BLOG_POSTS.find((p) => p.slug === params.slug) || BLOG_POSTS[0];

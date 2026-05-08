@@ -1,9 +1,16 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-  apiVersion: "2024-12-18.acacia",
-});
+let stripe: Stripe | null = null;
+
+function getStripe(): Stripe {
+  if (!stripe) {
+    stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
+      apiVersion: "2026-04-22.dahlia",
+    });
+  }
+  return stripe;
+}
 
 export async function POST(req: Request) {
   try {
@@ -20,7 +27,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ url: returnUrl });
     }
 
-    const session = await stripe.checkout.sessions.create({
+    const stripeInstance = getStripe();
+
+    const session = await stripeInstance.checkout.sessions.create({
       customer_email: email,
       client_reference_id: userId,
       payment_method_types: ["card"],
